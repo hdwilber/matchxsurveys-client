@@ -1,0 +1,388 @@
+.heading-main
+  .container
+    h1
+      | Dashboard
+.container.content-main
+  //-.modal-popup(*ngIf="popupLogic.add")
+    //-.row
+      //-.col-sm-12(*ngIf="tmps.logic != null")
+        //-.form-inline
+          //-.form-group
+            //-label
+              //-| Action
+            //-select.form-control([(ngModel)]="tmps.logic.action")
+              //-option(disabled) 
+                //-| Select an Action
+              //-option(*ngFor="let aco of getLogicActions()", [value]="aco.code")
+                //-| {{aco.name}}
+
+    //-.row
+      //-.col-sm-12
+        //-button.btn.btn-default((click)="addLogic()")
+          //-| Add Logic
+        //-button.btn.btn-default((click)="cancelPopupLogic(false)")
+          //-| Cancel
+
+  .modal-popup(*ngIf="popupLogic.edit") 
+    .row
+      .col-sm-12
+        .add-math-logic
+          h4
+            | New MatchLogic
+          .row
+            .form-inline
+              .form-group
+                label
+                  | Boolean
+                select.form-control([(ngModel)]="tmps.logic.bool")
+                  option(value="")
+                    | None
+                  option(*ngFor="let op of getBoolTypes()", [value]="op.code")
+                    | {{op.name}}
+          .row
+            .col-sm-12
+              button.btn.btn-default( (click)="addMatchLogic()" type='button')
+                | Add 
+
+        .add-match
+          h4
+            | New Match
+          .row(*ngIf="selected.quest != null")
+            label 
+              | Target Option
+            .form-group
+              label.col-sm-1
+                | Operator
+              .col-sm-1
+                select.form-control([(ngModel)]="tmps.logic.operator")
+                  option(*ngFor="let op of getOperatorTypes()", [ngValue]="op")
+                    | {{op.name}}
+              label.col-sm-1
+                | Group
+              .col-sm-2
+                select.form-control([(ngModel)]="selected.forLogic.group", (change)="forLogicSelectedGroup()")
+                  option(*ngFor="let st of selected.quest.groups",[ngValue]="st")
+                    | {{st.label.data}}
+              label.col-sm-1
+                | Question
+              .col-sm-2
+                select.form-control(*ngIf="selected.forLogic.group != null", [(ngModel)]="selected.forLogic.target",(change)="forLogicSelectedTarget()")
+                  option(*ngFor="let q of selected.forLogic.group.questions",[ngValue]="q")
+                    | {{q.code}}
+              label.col-sm-1
+                | Option
+              .col-sm-2
+                select.form-control(*ngIf="selected.forLogic.target != null", [(ngModel)]="selected.forLogic.option")
+                  option(*ngFor="let o of selected.forLogic.target.options",[ngValue]="o")
+                    | {{o.label.data}}
+            button.btn.btn-default.btn-login( (click)="addMatch()" type='button')
+              | Add 
+    .row
+      .col-sm-12
+        tree-node(*ngIf="selected.logic.logic.hierarchy != null", [node]='selected.logic.logic.hierarchy', [currentNode]="selected.logic.logic.hierarchy",(selectedNode)="handleSelectedNode($event)")
+    .row
+      .col-sm-12
+        button.btn.btn-default((click)="cancelPopupLogic(false)")
+          | Close
+
+  .modal-popup(*ngIf="popupLogic.manager")
+    .row
+      .col-sm-12
+        h3
+          | Logics
+        button.btn.btn-primary((click)="startAddLogic()")
+          | + Logic
+        .table-responsive(*ngIf="selected.logic.target != null")
+          table.table
+            thead
+              tr
+                th
+                  | Action
+                th
+                  | Actions
+            tbody(*ngIf="selected.logic.target.logics != null")
+              tr(*ngFor="let o of selected.logic.target.logics")
+                td
+                  | {{o.action}}
+                td
+                  a.btn.btn-default((click)="startEditLogic(o)")
+                    | Edit
+                  a.btn.btn-default((click)="deleteLogic(o)")
+                    | Delete
+    .row
+      .col-sm-12
+        button.btn.btn-default((click)="cancelPopupLogic(true)")
+          | Close
+
+  //-.modal-popup(*ngIf="popupOption.add") 
+    //-.row
+      //-.form-inline
+        //-.form-group
+          //-label
+            //-| Type: 
+          //-select.form-control([(ngModel)]="tmps.option.type")
+            //-option(*ngFor="let t of getOptionTypes()", [value]="t.code")
+              //-| {{t.name}}
+        //-.form-group
+          //-label
+            //-| Label:
+          //-input.form-control([(ngModel)]="tmps.option.label")
+        //-.form-group()
+          //-label
+            //-| Value:
+          //-input.form-control([(ngModel)]="tmps.option.value")
+    //-.row
+      //-.col-sm-12
+        //-button.btn.btn-default((click)="addOption()")
+          //-| Append!
+        //-button.btn.btn-default((click)="cancelPopupOption()")
+          //-| Cancel
+
+  //-.modal-popup(*ngIf="popupQuestion.add")
+    //-.row
+      //-.col-sm-8.col-sm-offset-2
+        //-.form-inline
+          //-.form-group
+            //-label
+              //-| Code: 
+              //-input.form-control( [(ngModel)]="tmps.question.code" type='text')
+            //-label
+              //-| Type: 
+              //-select.form-control([(ngModel)]="tmps.question.type")
+                //-option(*ngFor="let t of getQuestionTypes()", [ngValue]="t")
+                  //-| {{t.name}}
+            //-label(*ngIf="tmps.question.type != null")
+              //-| Subtype:
+              //-select.form-control([(ngModel)]="tmps.question.subType")
+                //-option(*ngFor="let r of tmps.question.type.subTypes", [ngValue]="r")
+                  //-| {{r.name}}
+             
+            //-label
+              //-| Text: 
+              //-input.form-control( [(ngModel)]="tmps.question.label" type='text')
+
+        //-.row
+          //-.form-group
+            //-button.btn.btn-default.btn-login( (click)="addQuestion()" type='button')
+              //-| Create 
+            //-button.btn.btn-default.btn-login( (click)="cancelPopupQuestion()" type='button')
+              //-| Cancel
+
+
+  //-.modal-popup(*ngIf="popupQuestion.edit")
+    //-.row
+      //-.col-sm-12
+        //-h3
+          //-| Option in Question
+        //-button.btn.btn-primary((click)="startAddOption()")
+          //-| + Option 
+        //-.table-responsive(*ngIf="selected.question != null")
+          //-table.table
+            //-thead
+              //-tr
+                //-th
+                  //-| Type
+                //-th
+                  //-| Code
+                //-th
+                  //-| Value
+                //-th
+                  //-| Actions
+            //-tbody(*ngIf="selected.question.options != null")
+              //-tr(*ngFor="let o of selected.question.options")
+                //-td
+                  //-| {{o.type}}
+                //-td
+                  //-| {{o.code}}
+                //-td
+                  //-| {{o.label.data}}
+                //-td
+                  //-a.btn.btn-default()
+                    //-| Edit
+                  //-a.btn.btn-default()
+                    //-| Delete
+    //-.row
+      //-.col-sm-12
+        //-button.btn.btn-default((click)="cancelPopupQuestion()")
+          //-| Close
+
+  // QUESTIONARY ADD POPUP 
+  //-.modal-popup(*ngIf="popupGroup.edit && selected.group != null")
+    //-.row
+      //-.col-sm-12
+        //-h3
+          //-| Questions
+        //-button.btn.btn-primary((click)="startAddQuestion()")
+          //-| + Question
+        //-.question-navigator(*ngIf="selected.group.questions != null", [ngSwitch]="selected.group.questions.length") 
+          //-.info(*ngSwitchCase="0")
+            //-| Currently, you have no any questions.
+          //-.info(*ngSwitchDefault="")
+            //-| Currently, you have ({{selected.group.questions.length}})
+          //-.table-responsive
+            //-table.table
+              //-thead
+                //-tr
+                  //-th
+                    //-| Code
+                  //-th
+                    //-| Type
+                  //-th
+                    //-| SubType
+                  //-th
+                    //-| Name
+                  //-th
+                    //-| Actions
+              //-tbody
+                //-tr(*ngFor="let q of selected.group.questions")
+                  //-td
+                    //-| {{q.code}}
+                  //-td
+                    //-| {{q.type}}
+                  //-td
+                    //-| {{q.subType}}
+                  //-td
+                    //-| {{q.label.data}}
+                  //-td
+                    //-button.btn.btn-defatul((click)="startEditQuestion(q)")
+                      //-| Edit!
+                    //-button.btn.btn-defatul((click)="startManagerLogic(q)")
+                      //-| Logics!
+                    //-button.btn.btn-defatul((click)="deleteQuestion(q)")
+                      //-| Delete!
+    //-.row
+      //-.form-group
+        //-button.btn.btn-default( (click)="cancelPopupGroup()" type='button')
+          //-| Close
+
+  //-.modal-popup(*ngIf="popupGroup.add && tmps.group != null")
+    //-.row
+      //-.col-sm-8.col-sm-offset-2
+        //-.form-inline
+          //-.form-group
+            //-label
+              //-| Code: 
+              //-input.form-control( [(ngModel)]="tmps.group.code" type='text')
+            //-label
+              //-| Label: 
+              //-input.form-control( [(ngModel)]="tmps.group.label" type='text')
+          //-.row
+            //-.form-group
+              //-button.btn.btn-default( (click)="addGroup()" type='button')
+                //-| Create 
+              //-button.btn.btn-default( (click)="cancelPopupGroup()" type='button')
+                //-| Cancel
+
+  // QUESTIONARY EDITION POPUP
+  //-.modal-popup(*ngIf="popupQuest.edit && tmps.quest != null && selected.quest != null")
+    //-.row
+      //-.col-sm-12
+        //-.heading-action
+          //-.heading
+            //-h5
+              //-| Edit Questionary (
+              //-span.heading-target
+                //-| {{selected.quest.code}} : {{selected.quest.label.data}}
+              //-| )
+
+          //-.actions
+            //-button.btn.btn-primary((click)="startAddGroup()")
+              //-| + Group
+
+    //-.row
+      //-.col-sm-12
+        //-.step-navigator-wrapper
+          //-.step-navigator
+            //-.table-responsive(*ngIf="selected.quest.groups != null")
+              //-table.table
+                //-thead
+                  //-tr
+                    //-th
+                      //-| Code
+                    //-th
+                      //-| Name
+                    //-th
+                      //-| Actions
+                //-tbody
+                  //-tr(*ngFor="let s of selected.quest.groups", [class.selected]="selected.group == s")
+                    //-td
+                      //-| {{s.code}} 
+                    //-td
+                      //-| {{s.label.data}}
+                    //-td
+                      //-button.btn.btn-defatul((click)="startEditGroup(s)")
+                        //-| Edit!
+                      //-button.btn.btn-defatul((click)="startManagerLogic(s)")
+                        //-| Logics!
+                      //-button.btn.btn-defatul((click)="deleteGroup(s)")
+                        //-| Delete!
+
+    //-.row
+      //-.form-group
+        //-button.btn.btn-default( (click)="cancelPopupQuest()" type='button')
+          //-| Close
+
+
+md-tab-group
+  md-tab(label='Questionaries')
+    .questionaries-list(*ngIf="questionaries != null")
+      .heading-action
+        h3.heading
+          | Available Questionaries ({{questionaries.length}})
+        .actions
+          a(md-button, (click)="startCreateQuest()")
+            | + Questionary
+      .table-responsive
+        table.table
+          thead
+            tr
+              th
+                | Code
+              th
+                | Name
+              th
+                | Actions
+          tbody
+            tr(*ngFor="let q of questionaries")
+              td
+                | {{ q.code }}
+              td
+                | {{ q.label.data }}
+              td
+                button(md-button, (click)="takeQuestionary(q)")
+                  | Take!
+                button(md-button, (click)="startEditQuest(q)")
+                  | Edit!
+                button(md-button, (click)="deleteQuestionary(q)")
+                  | Delete!
+  md-tab(label='Taken Quizzes')
+    .taken-quizzes-list(*ngIf="takenQuizzes != null")
+      .heading-action
+        h3.heading
+          | Taken Questionaries ({{takenQuizzes.length}})
+        .actions
+      .table-responsive
+        table.table
+          thead
+            tr
+              th
+                | Questionary Code
+              th
+                | Questionary Name
+              th
+                | Actions
+          tbody
+            tr(*ngFor="let tq of takenQuizzes")
+              td
+                | {{tq.questionary.code}}
+              td
+                | {{tq.questionary.label.data}}
+              td
+                button(md-button, (click)="continueTakenQuiz(tq);")
+                  | Continue
+                button(md-button, (click)="seeHistory(tq);")
+                  | History
+                button(md-button, (click)="deleteTakenQuiz(tq);")
+                  | Delete
+
+

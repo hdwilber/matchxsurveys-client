@@ -1,0 +1,18 @@
+
+<h1 md-dialog-title>Create Questionary</h1>
+<div md-dialog-content>
+  <div class="input-row">
+    <md-input-container>
+      <input class="form-control" mdInput [(ngModel)]="quest.code" type="text" placeholder="Code">
+    </md-input-container>
+  </div>
+  <div class="input-row">
+    <md-input-container>
+      <input class="form-control" mdInput [(ngModel)]="quest.label" type="text" placeholder="Label">
+    </md-input-container>
+  </div>
+</div>
+<div class="quest-footer" md-dialog-actions>
+  <button md-button (click)="create()" type="button">Create </button>
+  <button md-button (click)="cancel()" type="button">Cancel</button>
+</div>

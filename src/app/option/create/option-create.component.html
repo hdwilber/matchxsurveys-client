@@ -1,0 +1,28 @@
+
+<h1 md-dialog-title>Create Option</h1>
+<div md-dialog-content>
+  <div class="input-row">
+    <select [(ngModel)]="tmp.type" placeholder="Type">
+      <option *ngFor="let t of getOptionTypes()" [ngValue]="t">{{t.name}}</option>
+    </select>
+  </div>
+  <div class="input-row">
+    <md-input-container>
+      <input class="form-control" mdInput [(ngModel)]="tmp.label" type="text" placeholder="Label">
+    </md-input-container>
+  </div>
+  <div class="input-row">
+    <md-input-container>
+      <input mdInput [(ngModel)]="tmp.value" type="text" placeholder="Value">
+    </md-input-container>
+  </div>
+  <div class="input-row">
+    <md-input-container>
+      <input mdInput [(ngModel)]="tmp.extra" type="text" placeholder="Extra data">
+    </md-input-container>
+  </div>
+</div>
+<div class="quest-footer" md-dialog-actions>
+  <button md-button (click)="create()" type="button">Create </button>
+  <button md-button (click)="cancel()" type="button">Cancel</button>
+</div>

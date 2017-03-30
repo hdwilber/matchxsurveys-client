@@ -1,0 +1,23 @@
+h1(md-dialog-title)
+  | Create Option
+div(md-dialog-content)
+  .input-row
+    select([(ngModel)]="tmp.type", placeholder='Type')
+      option(*ngFor="let t of getOptionTypes()", [ngValue]="t")
+        | {{t.name}}
+  .input-row
+    md-input-container
+      input.form-control( mdInput, [(ngModel)]="tmp.label" type='text', placeholder='Label')
+  .input-row
+    md-input-container
+      input(mdInput, [(ngModel)]="tmp.value" type='text', placeholder='Value')
+  .input-row
+    md-input-container
+      input(mdInput, [(ngModel)]="tmp.extra" type='text', placeholder='Extra data')
+.quest-footer(md-dialog-actions)
+  button(md-button, (click)="create()" type='button')
+    | Create 
+  button(md-button, (click)="cancel()" type='button')
+    | Cancel
+ 
+

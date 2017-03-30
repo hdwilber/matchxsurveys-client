@@ -1,0 +1,148 @@
+.question-editor(*ngIf="question != null")
+  md-toolbar
+    span
+      | {{ question.code }} : {{question.label.data}}
+    span.spacer
+
+    button(md-button, (click)="startCreateOption()")
+      | Append Option
+    button(md-button, (click)="startCreateLogic()")
+      | Append Logic
+    button(md-button, (click)="deleteQuestion()")
+      | Delete 
+
+
+  md-tab-group
+    md-tab(label='Options')
+      h1
+        | Options
+      .table-responsive(*ngIf='question.options != null')
+        table.table
+          thead
+            tr
+              th
+                | Text
+              th
+                | Value
+              th
+                | Actions
+          tbody
+            tr(*ngFor="let o of question.options")
+              td
+                | {{o.label.data}}
+              td
+                | {{o.value}}
+              td
+                button(md-button)
+                  | Edit
+                button(md-button)
+                  | Delete
+
+
+    md-tab(label='Logics')
+      h1
+        | Logics
+      .table-responsive(*ngIf='question.logics != null')
+        table.table
+          thead
+            tr
+              th
+                | Code
+              th
+                | Action
+              th
+                | Actions
+          tbody
+            tr(*ngFor="let l of question.logics")
+              td
+                | {{ l.code }}
+              td
+                | {{ l.action }}
+              td
+                button(md-button, (click)='startEditLogic(l)')
+                  | Edit
+                button(md-button, (click)='deleteLogic(l)')
+                  | Delete
+
+.row
+  .form-group
+    button(md-button, color='primary', (click)="goToBack()")
+      | Close
+
+  //-.question-editor-options(*ngIf="question.type == 'level'")
+    //-.row
+      //-.col-sm-12
+        //-.heading-action
+          //-h4.heading
+            //-| Options
+          //-.actions
+            //-.form-inline
+              //-.form-group
+                //-label
+                  //-| Min:
+                //-input.form-control([(ngModel)]="newOption.value")
+              //-.form-group
+                //-label
+                  //-| Max:
+                //-input.form-control([(ngModel)]="newOption2.value")
+              //-button.btn.btn-default((click)="addMinMaxRange()")
+                //-| Add Range
+        //-.table-responsive
+          //-table.table
+            //-thead
+              //-tr
+                //-th
+                  //-| Min
+                //-th
+                  //-| Max 
+                //-th
+                  //-| Actions
+            //-tbody(*ngIf="options != null")
+              //-tr(*ngFor="let o of options")
+                //-td
+                  //-| {{getMinLevel()}}
+                //-td
+                  //-| {{getMaxLevel()}}
+                //-td
+                  //-a.btn.btn-default()
+                    //-| e
+                  //-a.btn.btn-default()
+                    //-| x
+
+  //-.question-editor-logics
+    //-.row
+      //-.col-sm-12
+        //-.heading-action
+          //-h4.heading
+            //-| Logics
+          //-.actions
+            //-.form-inline
+              //-.form-group
+                //-label
+                  //-| Action
+                //-select.form-control([(ngModel)]="newLogic.action")
+                  //-option(disabled) 
+                    //-| Select and Action
+                  //-option(*ngFor="let aco of getLogicActions()")
+                    //-| {{aco}}
+
+              //-button.btn.btn-default((click)="addLogic()")
+                //-| Add Logic
+
+        //-.table-responsive
+          //-table.table
+            //-thead
+              //-tr
+                //-th
+                  //-| Action
+                //-th
+                  //-| Actions
+            //-tbody(*ngIf="question.logics  != null")
+              //-tr(*ngFor="let l of question.logics")
+                //-td
+                  //-| {{ l.action }}
+                //-td
+                  //-a.btn.btn-default((click)='editLogic(l)')
+                    //-| Edit
+                  //-a.btn.btn-default((click)='deleteLogic(l)')
+                    //-| x

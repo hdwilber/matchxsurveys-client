@@ -1,0 +1,64 @@
+nav
+  md-toolbar(color='primary')
+    span
+      | Medische Expert Facilitator
+    span.spacer
+    button(md-button [mdMenuTriggerFor]="mainMenu")
+      md-icon
+        | more_vert
+    md-menu(#mainMenu="mdMenu")
+      button(md-menu-item, routerLink="/dashboard")
+        | Profile
+      button(md-menu-item, routerLink="/dashboard")
+        | Notifications
+      button(md-menu-item, *ngIf='session == null', routerLink="/login")
+        md-icon
+          | fingerprint
+        | Login
+      button(md-menu-item, *ngIf='session != null', (click)="logoutFnc()")
+        md-icon
+          | fingerprint
+        | Logout
+
+    
+//-<button md-icon-button [mdMenuTriggerFor]="menu">
+      //-<md-icon>more_vert</md-icon>
+    //-</button>
+    //-<md-menu #menu="mdMenu">
+      //-<button md-menu-item>
+        //-<md-icon>fingerprint</md-icon>
+        //-<span>Login</span>
+      //-</button>
+      //-<button md-menu-item disabled>
+        //-<md-icon>announcement</md-icon>
+        //-<span>Issues</span>
+      //-</button>
+      //-<button md-menu-item>
+        //-<md-icon>notifications_off</md-icon>
+        //-<span>Disable alerts</span>
+      //-</button>
+    //-</md-menu>
+
+//-nav.navbar.navbar-default
+  //-.navbar-header
+    //-button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar-main', aria-expanded='true', aria-controls='navbar')
+      //-span.sr-only 
+        //-| Toggle navigation
+      //-span.icon-bar
+      //-span.icon-bar
+      //-span.icon-bar
+    //-a.navbar-brand(href='#')
+      //-| Medische Expert Facilitator
+
+  //-#navbar-main.navbar-collapse.collapse
+    //-ul.nav.navbar-nav.pull-right
+      //-li(*ngIf="session != null")
+        //-a(routerLink="/dashboard")
+          //-| Dashboard 
+      //-li(*ngIf="session == null")
+        //-a(routerLink="/login")
+          //-| Login
+      //-li(*ngIf="session != null")
+        //-a((click)="logoutFnc()")
+          //-| Logout
+

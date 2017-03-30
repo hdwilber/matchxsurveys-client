@@ -1,0 +1,30 @@
+
+<h1 md-dialog-title>Create Question</h1>
+<div md-dialog-content>
+  <div class="input-row">
+    <md-input-container>
+      <input class="form-control" mdInput [(ngModel)]="tmp.code" type="text" placeholder="Code">
+    </md-input-container>
+  </div>
+  <div class="input-row">
+    <label>Type: </label>
+    <select [(ngModel)]="tmp.type" placeholder="Type">
+      <option *ngFor="let t of getQuestionTypes()" [ngValue]="t">{{t.name}}</option>
+    </select>
+  </div>
+  <div class="input-row">
+    <label>Sub Type: </label>
+    <select *ngIf="tmp.type != null" [(ngModel)]="tmp.subType" placeholder="Sub Type">
+      <option *ngFor="let r of tmp.type.subTypes" [ngValue]="r">{{r.name}}</option>
+    </select>
+  </div>
+  <div class="input-row">
+    <md-input-container>
+      <input mdInput [(ngModel)]="tmp.label" type="text" placeholder="Label">
+    </md-input-container>
+  </div>
+</div>
+<div class="quest-footer" md-dialog-actions>
+  <button md-button (click)="create()" type="button">Create </button>
+  <button md-button (click)="cancel()" type="button">Cancel</button>
+</div>

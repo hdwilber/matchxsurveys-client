@@ -1,0 +1,77 @@
+
+<h2>Logic Matches Editor</h2>
+<div class="row">
+  <div class="col-sm-12">
+    <tree-view *ngIf="jsonLogic != null" [root]="jsonLogic"></tree-view>
+    <div class="form">
+      <div class="row">
+        <div class="form-group">
+          <button class="btn btn-default btn-login" (click)="create()" type="button">Create </button>
+          <button class="btn btn-default btn-login" (click)="cancel()" type="button">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="row" *ngIf="questionary != null">
+      <label>
+         Object:</label>
+      <div class="form-group">
+        <label class="col-sm-3">Step</label>
+        <div class="col-sm-3">
+          <select class="form-control" [(ngModel)]="selOStep" (change)="stepSelected()">
+            <option *ngFor="let st of questionary.steps" [ngValue]="st">{{st.text}}</option>
+          </select>
+        </div>
+        <label class="col-sm-2">Question</label>
+        <div class="col-sm-2">
+          <select class="form-control" *ngIf="selOStep !=null" [(ngModel)]="match.question_id" (change)="questionSelected()">
+            <option *ngFor="let q of selOStep.questions" [value]="q.uid">{{q.code}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label class="col-sm-3">Operator</label>
+        <div class="col-sm-9">
+          <select class="form-control" [(ngModel)]="match.operator">
+            <option *ngFor="let op of getOperatorTypes()" [value]="op">{{op}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="questionary != null">
+      <label>
+         Target Option</label>
+      <div class="form-group">
+        <label class="col-sm-2">Step</label>
+        <div class="col-sm-2">
+          <select class="form-control" [(ngModel)]="selStep" (change)="stepSelected()">
+            <option *ngFor="let st of questionary.steps" [ngValue]="st">{{st.text}}</option>
+          </select>
+        </div>
+        <label class="col-sm-2">Question</label>
+        <div class="col-sm-2">
+          <select class="form-control" *ngIf="selStep !=null" [(ngModel)]="selQuestion" (change)="questionSelected()">
+            <option *ngFor="let q of selStep.questions" [ngValue]="q">{{q.code}}</option>
+          </select>
+        </div>
+        <label class="col-sm-2">Option</label>
+        <div class="col-sm-2">
+          <select class="form-control" *ngIf="selQuestion !=null" [(ngModel)]="match.target_option_id" (change)="optionSelected()">
+            <option *ngFor="let o of selQuestion.options" [value]="o.uid">{{o.text}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <button class="btn btn-default btn-login" (click)="create()" type="button">Create </button>
+        <button class="btn btn-default btn-login" (click)="cancel()" type="button">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

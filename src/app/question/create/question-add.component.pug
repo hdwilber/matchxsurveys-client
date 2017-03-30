@@ -1,0 +1,27 @@
+.heading-main
+  .container
+    h1
+      | Add Question
+.container.main-content
+.row
+  .col-sm-8.col-sm-offset-2
+    .form-inline
+      .form-group
+        label
+          | Code: 
+          input.form-control( [(ngModel)]="question.code" type='text')
+        label
+          | Type: 
+          select.form-control([(ngModel)]="question.type")
+            option(*ngFor="let t of getQuestionTypes()", [value]="t")
+              | {{t}}
+        label
+          | Text: 
+          input.form-control( [(ngModel)]="question.text" type='text')
+
+    .row
+      .form-group
+        button.btn.btn-default.btn-login( (click)="create()" type='button')
+          | Create 
+        button.btn.btn-default.btn-login( (click)="cancel()" type='button')
+          | Cancel

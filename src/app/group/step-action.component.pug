@@ -1,0 +1,40 @@
+.questionary-action(*ngIf="step != null")
+  .question-display-wrapper
+    .question-display(*ngIf="question != null")
+      .question
+        .question-code
+          | {{question.code}}
+        .question-text
+          | {{question.text}}
+        .question-body
+          .type-radio(*ngIf="question.type=='radio'")
+            .question-options
+              ul.question-options-list(*ngIf="question.options != null")
+                li.question-option(*ngFor="let o of question.options", [class.selected]="currentOption == o ")
+                  label
+                    | {{o.text}}
+                    input(type="radio",[value]='o.value',[name]="'radioName'", (click)="prepareData(o);")
+
+          .type-level(*ngIf="question.type=='level'")
+            .question-options
+              .question-level.text-center(*ngIf="question.options != null")
+                select([(ngModel)]="data.value", (change)="prepareData(null)")
+                  option(disabled)
+                    | Select a value
+                  option(*ngFor="let l of getArrayLevel()", [value]="l")
+                    | {{l}}
+
+          .type-remark(*ngIf="question.type=='remark'")
+            .question-options
+              .question-remark
+                button((click)="data.value = 1; prepareData(null)")
+                  | Continue
+
+          .type-remark(*ngIf="question.type=='text'")
+            .question-options
+              .question-text
+                textarea([(ngModel)]="data.text")
+                button((click)="prepareData()")
+                  | Continue
+
+

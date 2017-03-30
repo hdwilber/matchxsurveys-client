@@ -1,0 +1,37 @@
+
+<h1 md-dialog-title>New Match </h1>
+<div md-dialog-content>
+  <div class="input-row">
+    <label>Operator</label>
+    <select class="form-control" [(ngModel)]="tmp.operator">
+      <option disabled>
+         Select an Action</option>
+      <option *ngFor="let op of getOperatorTypes()" [ngValue]="op.code">{{op.name}}</option>
+    </select>
+    <label>
+       Group</label>
+    <select class="form-control" [(ngModel)]="tmp.group" (change)="selectGroup()">
+      <option disabled>
+         Select a Group</option>
+      <option *ngFor="let gr of questionary.groups" [ngValue]="gr">{{gr.label.data}}</option>
+    </select>
+    <label>
+       Question</label>
+    <select *ngIf="tmp.group != null" [(ngModel)]="tmp.target" (change)="selectTarget()">
+      <option disabled>
+         Select a Question</option>
+      <option *ngFor="let q of tmp.group.questions" [ngValue]="q">{{q.code}}</option>
+    </select>
+    <label>
+       Option</label>
+    <select *ngIf="tmp.target != null" [(ngModel)]="tmp.option">
+      <option disabled>
+         Select an Option</option>
+      <option *ngFor="let o of tmp.target.options" [ngValue]="o">{{o.label.data}}</option>
+    </select>
+  </div>
+</div>
+<div class="quest-footer" md-dialog-actions>
+  <button md-button (click)="create()" type="button">Create </button>
+  <button md-button (click)="cancel()" type="button">Cancel</button>
+</div>

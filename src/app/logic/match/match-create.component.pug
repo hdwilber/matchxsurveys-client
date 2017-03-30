@@ -1,0 +1,46 @@
+h1(md-dialog-title)
+  | New Match 
+div(md-dialog-content)
+  .input-row
+    //-md-input-container
+      //-input.form-control( mdInput, [(ngModel)]="tmp.code" type='text', placeholder='Code')
+    label
+      | Operator
+    select.form-control([(ngModel)]="tmp.operator")
+      option(disabled) 
+        | Select an Action
+      option(*ngFor="let op of getOperatorTypes()", [ngValue]="op.code")
+        | {{op.name}}
+
+
+    label 
+      | Group
+    select.form-control([(ngModel)]="tmp.group", (change)="selectGroup()")
+      option(disabled) 
+        | Select a Group
+      option(*ngFor="let gr of questionary.groups",[ngValue]="gr")
+        | {{gr.label.data}}
+    
+    label 
+      | Question
+    select(*ngIf="tmp.group != null", [(ngModel)]="tmp.target", (change)="selectTarget()")
+      option(disabled) 
+        | Select a Question
+      option(*ngFor="let q of tmp.group.questions",[ngValue]="q")
+        | {{q.code}}
+
+    label 
+      | Option
+    select(*ngIf="tmp.target != null", [(ngModel)]="tmp.option")
+      option(disabled) 
+        | Select an Option
+      option(*ngFor="let o of tmp.target.options",[ngValue]="o")
+        | {{o.label.data}}
+
+
+.quest-footer(md-dialog-actions)
+  button(md-button, (click)="create()" type='button')
+    | Create 
+  button(md-button, (click)="cancel()" type='button')
+    | Cancel
+ 

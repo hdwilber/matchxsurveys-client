@@ -1,0 +1,38 @@
+.questionary-edit(*ngIf="questionary != null")
+  h2
+    | {{questionary.code}} - {{questionary.text}}
+  button((click)="addQuestion()")
+    | + Question
+  .step-wrapper
+    .step
+      | {{step.code}} - {{step.text}}
+    .row
+      .col-sm-12
+        .form
+          .row
+            .form-group
+              label.col-sm-3
+                | Code: 
+              .col-sm-9
+                input.form-control( [(ngModel)]="step.code" type='text')
+          .row
+            .form-group
+              label.col-sm-3
+                | Text: 
+              .col-sm-9
+                input.form-control( [(ngModel)]="step.text" type='text')
+          .row
+            .form-group
+              label.col-sm-3
+                | Start question:
+              .col-sm-9
+                select.form-control( [(ngModel)]="step.start_id", *ngIf="questions != null" )
+                  option(*ngFor="let q of questions", [value]="q.uid")
+                    | {{q.text}}
+          .row
+            .form-group
+              button.btn.btn-default.btn-login( (click)="update()" type='button')
+                | Update!
+              button.btn.btn-default.btn-login( (click)="cancel()" type='button')
+                | Cancel
+

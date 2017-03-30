@@ -1,0 +1,18 @@
+
+<nav>
+  <md-toolbar color="primary"><span>Medische Expert Facilitator</span><span class="spacer"></span>
+    <button md-button [mdMenuTriggerFor]="mainMenu">
+      <md-icon>more_vert</md-icon>
+    </button>
+    <md-menu #mainMenu="mdMenu">
+      <button md-menu-item routerLink="/dashboard">Profile</button>
+      <button md-menu-item routerLink="/dashboard">Notifications</button>
+      <button md-menu-item *ngIf="session == null" routerLink="/login">
+        <md-icon>fingerprint</md-icon>Login
+      </button>
+      <button md-menu-item *ngIf="session != null" (click)="logoutFnc()">
+        <md-icon>fingerprint</md-icon>Logout
+      </button>
+    </md-menu>
+  </md-toolbar>
+</nav>

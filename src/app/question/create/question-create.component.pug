@@ -1,0 +1,29 @@
+h1(md-dialog-title)
+  | Create Question
+div(md-dialog-content)
+  .input-row
+    md-input-container
+      input.form-control( mdInput, [(ngModel)]="tmp.code" type='text', placeholder='Code')
+  .input-row
+    label
+      | Type: 
+    select([(ngModel)]="tmp.type", placeholder='Type')
+      option(*ngFor="let t of getQuestionTypes()", [ngValue]="t")
+        | {{t.name}}
+  .input-row
+    label
+      | Sub Type: 
+    select(*ngIf="tmp.type != null", [(ngModel)]="tmp.subType", placeholder='Sub Type')
+      option(*ngFor="let r of tmp.type.subTypes", [ngValue]="r")
+        | {{r.name}}
+  .input-row
+    md-input-container
+      input(mdInput, [(ngModel)]="tmp.label" type='text', placeholder='Label')
+
+.quest-footer(md-dialog-actions)
+  button(md-button, (click)="create()" type='button')
+    | Create 
+  button(md-button, (click)="cancel()" type='button')
+    | Cancel
+ 
+

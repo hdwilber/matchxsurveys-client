@@ -1,0 +1,49 @@
+
+<div class="questionary-action" *ngIf="step != null">
+  <div class="question-display-wrapper">
+    <div class="question-display" *ngIf="question != null">
+      <div class="question">
+        <div class="question-code">{{question.code}}</div>
+        <div class="question-text">{{question.text}}</div>
+        <div class="question-body">
+          <div class="type-radio" *ngIf="question.type=='radio'">
+            <div class="question-options">
+              <ul class="question-options-list" *ngIf="question.options != null">
+                <li class="question-option" *ngFor="let o of question.options" [class.selected]="currentOption == o ">
+                  <label>{{o.text}}
+                    <input type="radio" [value]="o.value" [name]="'radioName'" (click)="prepareData(o);">
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="type-level" *ngIf="question.type=='level'">
+            <div class="question-options">
+              <div class="question-level text-center" *ngIf="question.options != null">
+                <select [(ngModel)]="data.value" (change)="prepareData(null)">
+                  <option disabled>Select a value</option>
+                  <option *ngFor="let l of getArrayLevel()" [value]="l">{{l}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="type-remark" *ngIf="question.type=='remark'">
+            <div class="question-options">
+              <div class="question-remark">
+                <button (click)="data.value = 1; prepareData(null)">Continue</button>
+              </div>
+            </div>
+          </div>
+          <div class="type-remark" *ngIf="question.type=='text'">
+            <div class="question-options">
+              <div class="question-text">
+                <textarea [(ngModel)]="data.text"></textarea>
+                <button (click)="prepareData()">Continue</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

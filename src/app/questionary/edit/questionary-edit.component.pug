@@ -1,0 +1,118 @@
+.questionary-edit(*ngIf='questionary != null')
+  md-toolbar
+    span
+      | {{questionary.code}} : {{questionary.label.data}}
+    span.spacer
+
+    button(md-button, (click)="startCreateGroup()")
+      | Append Group
+    button(md-button, (click)="deleteQuestionary()")
+      | Delete Questionary
+
+  .step-navigator-wrapper
+    .step-navigator
+      .table-responsive(*ngIf="questionary.groups != null")
+        table.table
+          thead
+            tr
+              th
+                | Code
+              th
+                | Name
+              th
+                | Actions
+          tbody
+            tr(*ngFor="let s of questionary.groups", [class.selected]="selectedGroup == s")
+              td
+                | {{s.code}} 
+              td
+                | {{s.label.data}}
+              td
+                button(md-button, (click)="startEditGroup(s)")
+                  | Edit!
+                button(md-button, (click)="deleteGroup(s)")
+                  | Delete!
+
+.row
+  .form-group
+    button(md-button, color='primary', (click)="goToBack()")
+      | Close
+
+
+//-.heading-main(*ngIf="questionary != null")
+  //-.container
+    //-h1
+      //-| Edit Questionary (
+      //-span.heading-target
+        //-| {{questionary.code}} : {{questionary.text}}
+      //-| )
+//-.container.content-main(*ngIf="questionary != null")
+  //-.row
+    //-.col-sm-12
+      //-.heading-action
+        //-.heading
+        //-.actions
+          //-button.btn.btn-primary((click)="addStep()")
+            //-| + Step
+          //-button.btn.btn-primary((click)="addQuestion()")
+            //-| + Question
+
+  //-.row
+    //-.col-sm-12
+      //-.step-navigator-wrapper
+        //-.step-navigator
+          //-ol(*ngIf="questionary.steps != null")
+            //-li(*ngFor="let s of questionary.steps", (click)="changeStep(s)", [class.selected]="currentStep == s")
+              //-.step-navigator-item
+                //-| {{s.text}}
+
+  //-.row(*ngIf="currentStep != null")
+    //-.col-sm-12
+      //-.heading-action
+        //-h3.heading
+          //-| Logics
+        //-.actions
+          //-.form-inline
+            //-.form-group
+              //-label
+                //-| Action
+              //-select.form-control([(ngModel)]="newLogic.action")
+                //-option(disabled) 
+                  //-| Select and Action
+                //-option(*ngFor="let aco of getLogicActions()")
+                  //-| {{aco}}
+
+            //-button.btn.btn-primary((click)="addLogic()")
+              //-| Add Logic
+
+      //-.table-responsive
+        //-table.table
+          //-thead
+            //-tr
+              //-th
+                //-| Action
+              //-th
+                //-| Actions
+          //-tbody(*ngIf="currentStep.logics != null")
+            //-tr(*ngFor="let l of currentStep.logics")
+              //-td
+                //-| {{ l.action }}
+              //-td
+                //-a.btn.btn-default((click)='editLogic(l)')
+                  //-| Edit
+                //-a.btn.btn-default((click)='deleteLogic(l)')
+                  //-| x
+  
+  //-.row
+    //-.col-sm-3
+      //-h3
+        //-| Questions
+      //-.question-navigator-wrapper(*ngIf="currentStep != null")
+        //-.question-navigator(*ngIf="currentStep.questions != null ") 
+          //-ol
+            //-li(*ngFor="let q of currentStep.questions", (click)="changeQuestion(q)")
+              //-.question-navigator-item([class.selected]="currentQuestion == q")
+                //-| {{q.code}}
+    //-.col-sm-9
+
+

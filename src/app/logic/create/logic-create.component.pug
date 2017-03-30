@@ -1,0 +1,20 @@
+h1(md-dialog-title)
+  | Create Group
+div(md-dialog-content)
+  .input-row
+    md-input-container
+      input.form-control( mdInput, [(ngModel)]="tmp.code" type='text', placeholder='Code')
+    label
+      | Action
+    select.form-control([(ngModel)]="tmp.action")
+      option(disabled) 
+        | Select an Action
+      option(*ngFor="let aco of getLogicActions()", [value]="aco.code")
+        | {{aco.name}}
+.quest-footer(md-dialog-actions)
+  button(md-button, (click)="create()" type='button')
+    | Create 
+  button(md-button, (click)="cancel()" type='button')
+    | Cancel
+ 
+

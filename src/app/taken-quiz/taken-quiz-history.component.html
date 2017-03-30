@@ -1,0 +1,28 @@
+
+<div class="taken-quiz-history" *ngIf="takenQuiz != null">
+  <div class="taken-quiz-questionary" *ngIf="questionary != null">
+    <h2>{{questionary.code}} - {{questionary.text}}</h2>
+  </div>
+  <div class="selections-navigator-wrapper">
+    <div class="selections-navigator">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Question</th>
+              <th>Value</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="selections != null">
+            <tr *ngFor="let s of selections">
+              <td><span *ngIf="s.question != null">{{s.question.code}}</span></td>
+              <td><span *ngIf="s.option != null">{{s.option.text}}</span></td>
+              <td><a class="btn btn-default">e</a><a class="btn btn-default">x</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

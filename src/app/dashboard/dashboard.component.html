@@ -1,0 +1,170 @@
+
+<div class="heading-main">
+  <div class="container">
+    <h1>Dashboard</h1>
+  </div>
+</div>
+<div class="container content-main">
+  <div class="modal-popup" *ngIf="popupLogic.edit"> 
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="add-math-logic">
+          <h4>New MatchLogic</h4>
+          <div class="row">
+            <div class="form-inline">
+              <div class="form-group">
+                <label>Boolean</label>
+                <select class="form-control" [(ngModel)]="tmps.logic.bool">
+                  <option value="">None</option>
+                  <option *ngFor="let op of getBoolTypes()" [value]="op.code">{{op.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <button class="btn btn-default" (click)="addMatchLogic()" type="button">Add </button>
+            </div>
+          </div>
+        </div>
+        <div class="add-match">
+          <h4>New Match</h4>
+          <div class="row" *ngIf="selected.quest != null">
+            <label>
+               Target Option</label>
+            <div class="form-group">
+              <label class="col-sm-1">Operator</label>
+              <div class="col-sm-1">
+                <select class="form-control" [(ngModel)]="tmps.logic.operator">
+                  <option *ngFor="let op of getOperatorTypes()" [ngValue]="op">{{op.name}}</option>
+                </select>
+              </div>
+              <label class="col-sm-1">Group</label>
+              <div class="col-sm-2">
+                <select class="form-control" [(ngModel)]="selected.forLogic.group" (change)="forLogicSelectedGroup()">
+                  <option *ngFor="let st of selected.quest.groups" [ngValue]="st">{{st.label.data}}</option>
+                </select>
+              </div>
+              <label class="col-sm-1">Question</label>
+              <div class="col-sm-2">
+                <select class="form-control" *ngIf="selected.forLogic.group != null" [(ngModel)]="selected.forLogic.target" (change)="forLogicSelectedTarget()">
+                  <option *ngFor="let q of selected.forLogic.group.questions" [ngValue]="q">{{q.code}}</option>
+                </select>
+              </div>
+              <label class="col-sm-1">Option</label>
+              <div class="col-sm-2">
+                <select class="form-control" *ngIf="selected.forLogic.target != null" [(ngModel)]="selected.forLogic.option">
+                  <option *ngFor="let o of selected.forLogic.target.options" [ngValue]="o">{{o.label.data}}</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-default btn-login" (click)="addMatch()" type="button">Add </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <tree-node *ngIf="selected.logic.logic.hierarchy != null" [node]="selected.logic.logic.hierarchy" [currentNode]="selected.logic.logic.hierarchy" (selectedNode)="handleSelectedNode($event)"></tree-node>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <button class="btn btn-default" (click)="cancelPopupLogic(false)">Close</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-popup" *ngIf="popupLogic.manager">
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>Logics</h3>
+        <button class="btn btn-primary" (click)="startAddLogic()">+ Logic</button>
+        <div class="table-responsive" *ngIf="selected.logic.target != null">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Action</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="selected.logic.target.logics != null">
+              <tr *ngFor="let o of selected.logic.target.logics">
+                <td>{{o.action}}</td>
+                <td><a class="btn btn-default" (click)="startEditLogic(o)">Edit</a><a class="btn btn-default" (click)="deleteLogic(o)">Delete</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <button class="btn btn-default" (click)="cancelPopupLogic(true)">Close</button>
+      </div>
+    </div>
+  </div>
+  <!-- QUESTIONARY ADD POPUP -->
+  <!-- QUESTIONARY EDITION POPUP-->
+</div>
+<md-tab-group>
+  <md-tab label="Questionaries">
+    <div class="questionaries-list" *ngIf="questionaries != null">
+      <div class="heading-action">
+        <h3 class="heading">Available Questionaries ({{questionaries.length}})</h3>
+        <div class="actions"><a md-button (click)="startCreateQuest()">+ Questionary</a></div>
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let q of questionaries">
+              <td>{{ q.code }}</td>
+              <td>{{ q.label.data }}</td>
+              <td>
+                <button md-button (click)="takeQuestionary(q)">Take!</button>
+                <button md-button (click)="startEditQuest(q)">Edit!</button>
+                <button md-button (click)="deleteQuestionary(q)">Delete!</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </md-tab>
+  <md-tab label="Taken Quizzes">
+    <div class="taken-quizzes-list" *ngIf="takenQuizzes != null">
+      <div class="heading-action">
+        <h3 class="heading">Taken Questionaries ({{takenQuizzes.length}})</h3>
+        <div class="actions"></div>
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Questionary Code</th>
+              <th>Questionary Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tq of takenQuizzes">
+              <td>{{tq.questionary.code}}</td>
+              <td>{{tq.questionary.label.data}}</td>
+              <td>
+                <button md-button (click)="continueTakenQuiz(tq);">Continue</button>
+                <button md-button (click)="seeHistory(tq);">History</button>
+                <button md-button (click)="deleteTakenQuiz(tq);">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </md-tab>
+</md-tab-group>

@@ -1,0 +1,46 @@
+
+<div class="questionary-edit" *ngIf="questionary != null">
+  <h2>{{questionary.code}} - {{questionary.text}}</h2>
+  <button (click)="addQuestion()">+ Question</button>
+  <div class="step-wrapper">
+    <div class="step">{{step.code}} - {{step.text}}</div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form">
+          <div class="row">
+            <div class="form-group">
+              <label class="col-sm-3">Code: </label>
+              <div class="col-sm-9">
+                <input class="form-control" [(ngModel)]="step.code" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label class="col-sm-3">Text: </label>
+              <div class="col-sm-9">
+                <input class="form-control" [(ngModel)]="step.text" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label class="col-sm-3">Start question:</label>
+              <div class="col-sm-9">
+                <select class="form-control" [(ngModel)]="step.start_id" *ngIf="questions != null">
+                  <option *ngFor="let q of questions" [value]="q.uid">{{q.text}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <button class="btn btn-default btn-login" (click)="update()" type="button">Update!</button>
+              <button class="btn btn-default btn-login" (click)="cancel()" type="button">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

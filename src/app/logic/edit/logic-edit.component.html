@@ -1,0 +1,18 @@
+
+<div class="logic-edit" *ngIf="logic != null">
+  <md-toolbar><span>{{ logic.code }} : {{ logic.action }}</span><span class="spacer"></span>
+    <button md-button (click)="startCreateMatchLogic()">Append Match Logic</button>
+    <button md-button (click)="startCreateMatch()">Append Match</button>
+    <button md-button (click)="deleteGroup()">Delete </button>
+  </md-toolbar>
+  <h1>Logic</h1>
+  <button md-button (click)="deleteSelected()">Delete</button>
+  <div class="tree-node-wrapper">
+    <tree-node *ngIf="logic != null" [node]="logic" [currentNode]="selected" (selectedNode)="handleSelectedNode($event)"></tree-node>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group">
+    <button md-button color="primary" (click)="goToBack()">Close</button>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+
+<div class="questionary-edit" *ngIf="questionary != null">
+  <md-toolbar><span>{{questionary.code}} : {{questionary.label.data}}</span><span class="spacer"></span>
+    <button md-button (click)="startCreateGroup()">Append Group</button>
+    <button md-button (click)="deleteQuestionary()">Delete Questionary</button>
+  </md-toolbar>
+  <div class="step-navigator-wrapper">
+    <div class="step-navigator">
+      <div class="table-responsive" *ngIf="questionary.groups != null">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of questionary.groups" [class.selected]="selectedGroup == s">
+              <td>{{s.code}} </td>
+              <td>{{s.label.data}}</td>
+              <td>
+                <button md-button (click)="startEditGroup(s)">Edit!</button>
+                <button md-button (click)="deleteGroup(s)">Delete!</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group">
+    <button md-button color="primary" (click)="goToBack()">Close</button>
+  </div>
+</div>

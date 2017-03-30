@@ -1,0 +1,67 @@
+
+<div class="group-edit" *ngIf="group!= null">
+  <md-toolbar><span>{{group.code}} : {{group.label.data}}</span><span class="spacer"></span>
+    <button md-button (click)="startCreateQuestion()">Append Question</button>
+    <button md-button (click)="startCreateLogic()">Append Logic</button>
+    <button md-button (click)="deleteGroup()">Delete Group</button>
+  </md-toolbar>
+  <md-tab-group>
+    <md-tab label="Children">
+      <h1>Questions</h1>
+      <div class="table-responsive" *ngIf="group.questions != null">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Type</th>
+              <th>Subtype</th>
+              <th>Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of group.questions" [class.selected]="selectedQuestion == s">
+              <td>{{s.code}} </td>
+              <td>{{s.type}} </td>
+              <td>{{s.subType}} </td>
+              <td>{{s.label.data}}</td>
+              <td>
+                <button md-button (click)="startEditQuestion(s)">Edit!</button>
+                <button md-button (click)="deleteQuestion(s)">Delete!</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </md-tab>
+    <md-tab label="Logics">
+      <h1>Logics</h1>
+      <div class="table-responsive" *ngIf="group.logics != null">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Action</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of group.logics">
+              <td>{{s.code}} </td>
+              <td>{{s.action}} </td>
+              <td>
+                <button md-button (click)="startEditLogic(s)">Edit!</button>
+                <button md-button (click)="deleteLogic(s)">Delete!</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </md-tab>
+  </md-tab-group>
+</div>
+<div class="row">
+  <div class="form-group">
+    <button md-button color="primary" (click)="goToBack()">Close</button>
+  </div>
+</div>

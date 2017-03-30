@@ -1,0 +1,76 @@
+.group-edit(*ngIf='group!= null')
+  md-toolbar
+    span
+      | {{group.code}} : {{group.label.data}}
+    span.spacer
+
+    button(md-button, (click)="startCreateQuestion()")
+      | Append Question
+    button(md-button, (click)="startCreateLogic()")
+      | Append Logic
+    button(md-button, (click)="deleteGroup()")
+      | Delete Group
+
+  md-tab-group
+    md-tab(label='Children')
+      h1
+        | Questions
+      .table-responsive(*ngIf="group.questions != null")
+        table.table
+          thead
+            tr
+              th
+                | Code
+              th
+                | Type
+              th
+                | Subtype
+              th
+                | Name
+              th
+                | Actions
+          tbody
+            tr(*ngFor="let s of group.questions", [class.selected]="selectedQuestion == s")
+              td
+                | {{s.code}} 
+              td
+                | {{s.type}} 
+              td
+                | {{s.subType}} 
+              td
+                | {{s.label.data}}
+              td
+                button(md-button, (click)="startEditQuestion(s)")
+                  | Edit!
+                button(md-button, (click)="deleteQuestion(s)")
+                  | Delete!
+    md-tab(label='Logics')
+      h1
+        | Logics
+      .table-responsive(*ngIf="group.logics != null")
+        table.table
+          thead
+            tr
+              th
+                | Code
+              th
+                | Action
+              th
+                | Actions
+          tbody
+            tr(*ngFor="let s of group.logics")
+              td
+                | {{s.code}} 
+              td
+                | {{s.action}} 
+              td
+                button(md-button, (click)="startEditLogic(s)")
+                  | Edit!
+                button(md-button, (click)="deleteLogic(s)")
+                  | Delete!
+   
+
+.row
+  .form-group
+    button(md-button, color='primary', (click)="goToBack()")
+      | Close

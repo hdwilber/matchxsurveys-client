@@ -1,0 +1,16 @@
+h1(md-dialog-title)
+  | Create Questionary
+div(md-dialog-content)
+  .input-row
+    md-input-container
+      input.form-control( mdInput, [(ngModel)]="quest.code" type='text', placeholder='Code')
+  .input-row
+    md-input-container
+      input.form-control( mdInput, [(ngModel)]="quest.label" type='text', placeholder='Label')
+
+.quest-footer(md-dialog-actions)
+  button(md-button, (click)="create()" type='button')
+    | Create 
+  button(md-button, (click)="cancel()" type='button')
+    | Cancel
+ 

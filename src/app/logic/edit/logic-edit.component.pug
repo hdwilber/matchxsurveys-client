@@ -1,0 +1,24 @@
+.logic-edit(*ngIf='logic != null')
+  md-toolbar
+    span
+      | {{ logic.code }} : {{ logic.action }}
+    span.spacer
+    button(md-button, (click)="startCreateMatchLogic()")
+      | Append Match Logic
+    button(md-button, (click)="startCreateMatch()")
+      | Append Match
+    button(md-button, (click)="deleteGroup()")
+      | Delete 
+
+  h1
+    | Logic
+
+  button(md-button, (click)="deleteSelected()")
+    | Delete
+  .tree-node-wrapper
+    tree-node(*ngIf="logic != null", [node]='logic', [currentNode]="selected",(selectedNode)="handleSelectedNode($event)")
+
+.row
+  .form-group
+    button(md-button, color='primary', (click)="goToBack()")
+      | Close

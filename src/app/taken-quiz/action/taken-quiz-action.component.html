@@ -1,0 +1,32 @@
+
+<div class="taken-quiz-action" *ngIf="takenQuiz != null">
+  <h1>Taking (<span *ngIf="takenQuiz.questionary != null">{{takenQuiz.questionary.code}} : {{takenQuiz.questionary.label.data}}</span>)</h1>
+  <div class="step-navigator-wrapper" *ngIf="takenQuiz.questionary != null">
+    <div class="step-navigator">
+      <ol *ngIf="takenQuiz.questionary.groups != null">
+        <li *ngFor="let s of takenQuiz.questionary.groups" [class.selected]="currentGroup == s.id">
+          <div class="step-navigator-item">{{s.label.data}}</div>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="question-display" *ngIf="question != null">
+    <div class="question">
+      <div class="question-code">{{question.code}}</div>
+      <div class="question-text">{{question.label.data}}</div>
+      <div class="question-body">
+        <div class="type-radio" *ngIf="question.type=='selection' &amp;&amp; question.subType =='simple'">
+          <div class="question-options">
+            <ul class="question-options-list" *ngIf="question.options != null">
+              <li class="question-option" *ngFor="let o of question.options" [class.selected]="currentOption == o">
+                <label>{{o.label.data}}
+                  <input type="radio" [value]="o.id" [name]="'radioName'" (click)="sendAnswer(o);">
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

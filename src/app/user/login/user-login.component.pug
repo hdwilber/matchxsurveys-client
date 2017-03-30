@@ -1,0 +1,14 @@
+.login-form(fxFlex='100', fxLayout='column')
+  md-toolbar
+    | Login
+  .form-group(fxLayoutAlign='center center', fxLayout='column')
+    .input-row
+      md-input-container
+        input(mdInput, placeholder="Email", [(ngModel)]='user.email')
+    .input-row
+      md-input-container
+        input(mdInput, type="password", placeholder="Password", [(ngModel)]='user.password')
+    .input-row
+      button(md-button, color='primary', (click)="login()")
+        | Login
+

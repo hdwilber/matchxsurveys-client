@@ -1,0 +1,16 @@
+.tree-node(*ngIf="node != null")
+  input(*ngIf="node.type == 'match-logic' || node.type == 'logic'", type="checkbox",[checked]="node.expanded",(click)="toggleExpand(node)")
+  label((click)="select(node)", [class.selected]="currentNode == node")
+    span.data-operator(*ngIf="node.name ===  undefined")
+      | {{node.type}}
+    span.data-operator(*ngIf="node.name !==  undefined")
+      | {{node.name}}
+    span(*ngIf="currentNode == node")
+      | **
+
+
+  .tree-node-children(style="margin-left: 50px", *ngIf="node.expanded")
+    .children(*ngFor="let c of node.children")
+      tree-node([node]="c", [currentNode]="currentNode", (selectedNode)="functionde($event)")
+
+
