@@ -7,10 +7,8 @@ nav
       md-icon
         | more_vert
     md-menu(#mainMenu="mdMenu")
-      button(md-menu-item, routerLink="/dashboard")
-        | Profile
-      button(md-menu-item, routerLink="/dashboard")
-        | Notifications
+      button(md-menu-item, *ngIf="session != null", routerLink="/dashboard")
+        | Dashboard
       button(md-menu-item, *ngIf='session == null', routerLink="/login")
         md-icon
           | fingerprint

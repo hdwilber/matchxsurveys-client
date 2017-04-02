@@ -61,7 +61,7 @@ import { MatchCreateComponent } from './logic/match/match-create.component';
 
 import { TakenQuizActionComponent } from './taken-quiz/action/taken-quiz-action.component';
 
-//import { TakenQuizHistoryComponent } from './questionary/taken-quiz-history.component';
+import { TakenQuizHistoryComponent } from './taken-quiz/history/taken-quiz-history.component';
 
 
 //import { LogicEditComponent } from './questionary/logic-edit.component';
@@ -110,7 +110,7 @@ import { TreeNodeComponent } from "./tree-view/tree-node.component";
     //LogicEditComponent,
 
     TakenQuizActionComponent,
-    //TakenQuizHistoryComponent,
+    TakenQuizHistoryComponent,
     //TreeViewComponent,
     TreeNodeComponent
   ],

@@ -257,9 +257,9 @@ export class DashboardComponent implements OnInit {
     //}
     
   //}
-  //seeHistory(tq:TakenQuiz) : void {
-    //this.router.navigate(['/history/'+tq.uid]);
-  //}
+  seeHistory(tq:TakenQuiz) : void {
+    this.router.navigate(['/history/'+tq.id]);
+  }
   //actionQuestionary(q: Questionary):void {
     //this.router.navigate(['/questionaries/'+q.uid]);
   //}

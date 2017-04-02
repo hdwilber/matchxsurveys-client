@@ -1,0 +1,22 @@
+
+<div class="taken-quiz-history" *ngIf="takenQuiz != null">
+  <h2>{{takenQuiz.questionary.code}} - {{takenQuiz.questionary.label.data}}</h2>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Value</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="takenQuiz.answers != null">
+        <tr *ngFor="let s of takenQuiz.answers">
+          <td><span>{{s.question.code}}</span></td>
+          <td><span>{{s.option.label.data}}</span></td>
+          <td><a class="btn btn-default">e</a><a class="btn btn-default">x</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

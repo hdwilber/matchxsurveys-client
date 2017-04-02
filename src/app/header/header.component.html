@@ -5,8 +5,7 @@
       <md-icon>more_vert</md-icon>
     </button>
     <md-menu #mainMenu="mdMenu">
-      <button md-menu-item routerLink="/dashboard">Profile</button>
-      <button md-menu-item routerLink="/dashboard">Notifications</button>
+      <button md-menu-item *ngIf="session != null" routerLink="/dashboard">Dashboard</button>
       <button md-menu-item *ngIf="session == null" routerLink="/login">
         <md-icon>fingerprint</md-icon>Login
       </button>

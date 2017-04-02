@@ -3,9 +3,9 @@
   <h1>Taking (<span *ngIf="takenQuiz.questionary != null">{{takenQuiz.questionary.code}} : {{takenQuiz.questionary.label.data}}</span>)</h1>
   <div class="step-navigator-wrapper" *ngIf="takenQuiz.questionary != null">
     <div class="step-navigator">
-      <ol *ngIf="takenQuiz.questionary.groups != null">
-        <li *ngFor="let s of takenQuiz.questionary.groups" [class.selected]="currentGroup == s.id">
-          <div class="step-navigator-item">{{s.label.data}}</div>
+      <ol>
+        <li class="selected" *ngIf="group != null">
+          <div class="step-navigator-item">{{ group.label.data }}</div>
         </li>
       </ol>
     </div>

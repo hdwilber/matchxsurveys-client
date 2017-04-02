@@ -45,6 +45,23 @@ export class TakenQuizService {
             return Promise.resolve();
           });
     }
+    getHistory(id: number): Promise<TakenQuiz> {
+      return this.http.get(this.restService.getServerPath() + '/taken-quizzes/'+id+'/history',
+                           {headers: this.restService.createHeaders()})
+          .toPromise()
+          .then( res => {
+            var aux = res.json();
+            return aux.data as TakenQuiz
+          })
+          .catch(err => { 
+            console.log ("Getting TakenQuiz failed");
+            this.checkUnauthorized(err);
+            console.log(err);
+            if (err.status == 401) {
+            }
+            return Promise.resolve();
+          });
+    }
 
     takeQuestionary(q: Questionary): Promise<TakenQuiz> {
       return this.http.get(this.restService.getServerPath() + '/questionaries/'+q.id+'/take', {headers: this.restService.createHeaders()})

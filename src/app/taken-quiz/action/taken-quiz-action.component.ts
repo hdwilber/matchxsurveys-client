@@ -18,6 +18,7 @@ export class TakenQuizActionComponent implements OnInit {
   takenQuiz: TakenQuiz; 
   question: Question;
   currentGroup: number = -1;
+  group: Group;
 
   constructor (private route: ActivatedRoute, private router: Router, private uService: UserService, private qService:QuestionaryService, private tqService: TakenQuizService ) {
   }
@@ -37,6 +38,7 @@ export class TakenQuizActionComponent implements OnInit {
           this.answer.id = q.id;
           this.question = q.question;
           this.currentGroup = q.group.id;
+          this.group = q.group;
 
           console.log(q);
         });
@@ -57,8 +59,8 @@ export class TakenQuizActionComponent implements OnInit {
           this.answer.id = ans.id;
           this.question = ans.question;
           this.currentGroup = ans.group.id;
+          this.group = ans.group;
       });
-
     }
   }
 

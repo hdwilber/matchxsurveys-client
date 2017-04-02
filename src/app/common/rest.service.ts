@@ -10,8 +10,8 @@ import { UserService } from "../user/common/user.service";
 @Injectable()
 export class RestService {
 
-    //server: string = "http://maxsurvey-hdwilber.rhcloud.com";
-    server: string = "http://localhost:8080";
+    server: string = "http://maxsurvey-hdwilber.rhcloud.com";
+    //server: string = "http://localhost:8080";
     //server: string = "https://matchxsurveys.com";
     session: Session;
     authCode = "Bearer";

@@ -147,6 +147,7 @@
         <table class="table">
           <thead>
             <tr>
+              <th>Started</th>
               <th>Questionary Code</th>
               <th>Questionary Name</th>
               <th>Actions</th>
@@ -154,6 +155,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let tq of takenQuizzes">
+              <td>{{tq.created_at.date}}</td>
               <td>{{tq.questionary.code}}</td>
               <td>{{tq.questionary.label.data}}</td>
               <td>

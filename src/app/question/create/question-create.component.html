@@ -23,6 +23,10 @@
       <input mdInput [(ngModel)]="tmp.label" type="text" placeholder="Label">
     </md-input-container>
   </div>
+  <div class="input-row">
+    <label>Default Visibility</label>
+    <input [(ngModel)]="tmp.visibility" type="checkbox" placeholder="Default Visibility">
+  </div>
 </div>
 <div class="quest-footer" md-dialog-actions>
   <button md-button (click)="create()" type="button">Create </button>

@@ -8,10 +8,15 @@
 
   .step-navigator-wrapper(*ngIf="takenQuiz.questionary != null")
     .step-navigator
-      ol(*ngIf="takenQuiz.questionary.groups != null")
-        li(*ngFor="let s of takenQuiz.questionary.groups", [class.selected]="currentGroup == s.id")
+      //-ol(*ngIf="takenQuiz.questionary.groups != null")
+      ol
+        li.selected(*ngIf="group != null")
           .step-navigator-item
-            | {{s.label.data}}
+            | {{ group.label.data }}
+
+        //-li(*ngFor="let s of takenQuiz.questionary.groups", [class.selected]="currentGroup == s.id")
+          //-.step-navigator-item
+            //-| {{s.label.data}}
 
 
   .question-display(*ngIf="question != null")

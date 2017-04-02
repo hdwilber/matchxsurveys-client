@@ -26,7 +26,8 @@ export class QuestionCreateComponent implements OnInit {
       name: null,
       type: null,
       subType: null,
-      label: null
+      label: null,
+      visibility: true
     };
   }
   ngOnInit():void  {
@@ -38,7 +39,8 @@ export class QuestionCreateComponent implements OnInit {
       name: this.tmp.name,
       type: this.tmp.type.code,
       sub_type: this.tmp.subType.code,
-      label: this.tmp.label
+      label: this.tmp.label,
+      default_visibility: this.tmp.visibility
     })
     .then( q => {
       this.question = q;

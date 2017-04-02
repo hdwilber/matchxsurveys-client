@@ -13,6 +13,7 @@ import { GroupEditComponent } from './group/edit/group-edit.component';
 import { QuestionEditComponent } from './question/edit/question-edit.component';
 import { LogicEditComponent } from './logic/edit/logic-edit.component';
 import { TakenQuizActionComponent } from './taken-quiz/action/taken-quiz-action.component';
+import { TakenQuizHistoryComponent } from './taken-quiz/history/taken-quiz-history.component';
 
 //import { QuestionaryAddComponent } from './questionary/questionary-add.component';
 //import { QuestionaryActionComponent } from './questionary/questionary-action.component';
@@ -45,8 +46,8 @@ const routes: Routes = [
     { path: 'group/:groupId/edit', component: GroupEditComponent },
     { path: 'question/:questionId/edit', component: QuestionEditComponent },
     { path: 'logic/:logicId/edit', component: LogicEditComponent },
-    { path: 'take/:takenQuizId', component: TakenQuizActionComponent}
-    //{ path: 'history/:takenQuizId', component: TakenQuizHistoryComponent},
+    { path: 'take/:takenQuizId', component: TakenQuizActionComponent},
+    { path: 'history/:takenQuizId', component: TakenQuizHistoryComponent}
     //{ path: 'questionaries/add', component: QuestionaryAddComponent},
     //{ path: 'questionaries/:questionaryId/edit', component: QuestionaryEditComponent},
     //{ path: 'questionaries/:questionaryId/steps/:stepId/edit', component: QuestionaryEditComponent},

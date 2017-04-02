@@ -366,6 +366,8 @@ md-tab-group
           thead
             tr
               th
+                | Started
+              th
                 | Questionary Code
               th
                 | Questionary Name
@@ -373,6 +375,8 @@ md-tab-group
                 | Actions
           tbody
             tr(*ngFor="let tq of takenQuizzes")
+              td
+                | {{tq.created_at.date}}
               td
                 | {{tq.questionary.code}}
               td

@@ -1,0 +1,26 @@
+.taken-quiz-history(*ngIf="takenQuiz != null")
+  h2
+    | {{takenQuiz.questionary.code}} - {{takenQuiz.questionary.label.data}}
+  .table-responsive
+    table.table
+      thead
+        tr
+          th
+            | Question
+          th
+            | Value
+          th
+            | Actions
+      tbody(*ngIf="takenQuiz.answers != null")
+        tr(*ngFor="let s of takenQuiz.answers")
+          td
+            span
+              | {{s.question.code}}
+          td
+            span
+              | {{s.option.label.data}}
+          td
+            a.btn.btn-default()
+              | e
+            a.btn.btn-default()
+              | x
