@@ -95,6 +95,7 @@ import { TreeNodeComponent } from "./tree-view/tree-node.component";
 
     MatchLogicCreateComponent,
     MatchCreateComponent,
+
     //QuestionaryAddComponent,
     //QuestionaryActionComponent,
 
@@ -114,6 +115,7 @@ import { TreeNodeComponent } from "./tree-view/tree-node.component";
     //TreeViewComponent,
     TreeNodeComponent
   ],
+
   imports: [
     BrowserModule,
     FormsModule,
