@@ -67,8 +67,10 @@ import { TakenQuizHistoryComponent } from './taken-quiz/history/taken-quiz-histo
 //import { LogicEditComponent } from './questionary/logic-edit.component';
 //import { MatchsEditorComponent } from './questionary/matchs-editor.component';
 
-import { TreeViewComponent } from "./tree-view/tree-view.component";
+//import { TreeViewComponent } from "./tree-view/tree-view.component";
 import { TreeNodeComponent } from "./tree-view/tree-node.component";
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -123,7 +125,8 @@ import { TreeNodeComponent } from "./tree-view/tree-node.component";
     HttpModule,
     AppRoutingModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    BrowserAnimationsModule
   ],
   providers: [
     RestService,

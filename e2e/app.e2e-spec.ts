@@ -1,10 +1,10 @@
-import { MefNgPage } from './app.po';
+import { MefClientPage } from './app.po';
 
-describe('mef-ng App', function() {
-  let page: MefNgPage;
+describe('mef-client App', () => {
+  let page: MefClientPage;
 
   beforeEach(() => {
-    page = new MefNgPage();
+    page = new MefClientPage();
   });
 
   it('should display message saying app works', () => {

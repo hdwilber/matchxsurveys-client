@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class MefNgPage {
+export class MefClientPage {
   navigateTo() {
     return browser.get('/');
   }
